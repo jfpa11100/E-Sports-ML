@@ -38,11 +38,13 @@ El proyecto compara modelos de **Regresión Logística** y **SVM**, ambos entren
 Ambos modelos rinden apenas por encima del azar, consistente con el EDA: ninguna variable individual separa bien las clases Win/Loss. El análisis y la comparación final se agregarán al notebook próximamente.
 
 ## Estructura del repositorio
+```
 E-Sports-ML/
 ├── data/
 │ └── esports_gaming_biometrics_250k.csv # Dataset principal (250k registros)
 ├── notebook.ipynb # Notebook principal del proyecto
 └── README.md
+```
 
 ## Cómo abrir el notebook
 
