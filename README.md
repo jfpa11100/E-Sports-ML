@@ -16,26 +16,28 @@ Proyecto de clasificación de Machine Learning sobre el dataset [E-Sports Biomet
 
 **Variable de salida:** `Match_Outcome` (Win / Loss) — problema de clasificación binaria.
 
-El proyecto compara modelos de **Regresión Logística** y **SVM**, ambos entrenados con validación cruzada de 10 folds y distintas configuraciones de hiperparámetros (incluyendo distintos kernels para SVM), evaluados con Precision, Recall y F1.
+El proyecto compara dos modelos, ambos entrenados con validación cruzada de 10 folds y una malla de hiperparámetros, evaluados con Precision, Recall y F1:
+- **Regresión Logística**, con `class_weight="balanced"`.
+- **SVM (soft-margin primal, lineal)** — `LinearSVC(dual=False)`, sin kernel trick.
 
 ## Estado del proyecto
 
 - [x] Selección del dataset y descripción detallada
 - [x] Análisis exploratorio de datos (EDA)
 - [x] Tratamiento de valores faltantes
-- [x] Preprocesamiento (encoding, escalado, split train/test)
+- [x] Preprocesamiento (encoding, escalado, split train/test 70/30)
 - [x] Regresión Logística con validación cruzada (10 folds) y grid de hiperparámetros
-- [x] SVM con validación cruzada (10 folds) y grid de kernels
-- [ ] Comparación final de modelos y selección del mejor
+- [x] SVM (soft-margin primal) con validación cruzada (10 folds) y grid de hiperparámetros
+- [x] Comparación final de modelos y conclusiones
 
-### Resultados preliminares
+### Resultados finales
 
 | Modelo | F1 (CV, 10 folds) | Accuracy (test) |
 |---|---|---|
-| Regresión Logística | 0.415 | 0.53 |
-| SVM (kernel lineal) | 0.469 | 0.52 |
+| Regresión Logística | 0.518 | 0.53 |
+| SVM (lineal, primal) | 0.518 | 0.53 |
 
-Ambos modelos rinden apenas por encima del azar, consistente con el EDA: ninguna variable individual separa bien las clases Win/Loss. El análisis y la comparación final se agregarán al notebook próximamente.
+Ambos modelos obtienen resultados prácticamente idénticos — coherente con que, sin kernel trick, SVM primal y Regresión Logística son ambos clasificadores lineales con regularización L2 fuerte (`C=0.001` ganó en los dos). El desempeño ronda apenas por encima de una predicción trivial, consistente con el EDA: solo `APM` y `Reaction_Time_ms` muestran señal predictiva real; el resto de variables biométricas aporta poco de forma individual. Ver el notebook para el análisis completo de coeficientes, matrices de confusión y conclusiones.
 
 ## Estructura del repositorio
 ```
